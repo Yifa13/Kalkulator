@@ -1,0 +1,38 @@
+<div class="calculator">
+  <h2>Kalkulator Luas Persegi Panjang</h2>
+  <div class="input-group">
+    <label for="length">Panjang:</label>
+    <input
+      id="length"
+      type="text"
+      placeholder="Masukkan panjang"
+      (input)="onLengthChange($event.target.value)"
+    />
+  </div>
+  <div class="input-group">
+    <label for="width">Lebar:</label>
+    <input
+      id="width"
+      type="text"
+      placeholder="Masukkan lebar"
+      (input)="onWidthChange($event.target.value)"
+    />
+  </div>
+  <div class="result">
+    <h3>Luas:</h3>
+    <div *ngIf="area$ | async as area; else loading">
+      <div *ngIf="area !== null; else error">
+        {{ area }} cm²
+      </div>
+      <ng-template #error>
+        <div class="error">Masukkan panjang dan lebar yang valid untuk menghitung luas.</div>
+      </ng-template>
+    </div>
+    <ng-template #loading>
+      <div>Masukkan panjang dan lebar untuk menghitung luas.</div>
+    </ng-template>
+  </div>
+  <div *ngIf="error$ | async as errorMsg" class="error-message">
+    <div class="error">{{ errorMsg }}</div>
+  </div>
+</div>
